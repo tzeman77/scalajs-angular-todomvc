@@ -47,7 +47,8 @@ object ApplicationBuild extends Build with UniversalKeys {
         "com.github.benhutchison" %% "prickle" % Versions.prickle,
         "org.squeryl" %% "squeryl" % "0.9.5-7",
         "org.webjars" % "jquery" % "2.1.3",
-        "org.webjars" % "angularjs" % "1.3.13"
+        "org.webjars" % "angularjs" % "1.3.13",
+	"org.webjars" % "angular-nvd3" % "0.0.9"
       ),
       commands += preStartCommand,
       EclipseKeys.skipParents in ThisBuild := false
@@ -69,7 +70,7 @@ object ApplicationBuild extends Build with UniversalKeys {
       libraryDependencies ++= Seq(
         "com.greencatsoft" %%% "scalajs-angular" % Versions.library,
         "com.github.benhutchison" %%% "prickle" % Versions.prickle,
-        "com.greencatsoft" %%% "greenlight" % "0.1-SNAPSHOT" % "test"
+        "com.greencatsoft" %%% "greenlight" % "0.1" % "test"
       )
     )
 
@@ -88,7 +89,7 @@ object ApplicationBuild extends Build with UniversalKeys {
 
 object Versions {
   val app = "0.3-SNAPSHOT"
-  val library = "0.4-SNAPSHOT"
+  val library = "0.4"
   val scala = "2.11.5"
   val prickle = "1.1.3"
 }
