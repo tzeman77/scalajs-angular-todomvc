@@ -3,7 +3,7 @@
 <html lang="en" ng-app="todomvc" data-framework="angularjs">
 <head>
   <meta charset="utf-8">
-  <title>AngularJS Binding for Scala.js :: TodoMVC Example</title>
+  <title>Charts Demo</title>
 
   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("lib/nvd3/nv.d3.css")">
@@ -17,7 +17,13 @@
   <style>[ng-cloak] { display: none; }</style>
 </head>
 <body>
-<section id="todoapp" ng-controller="TodoCtrl">
+<section id="bullet" ng-controller="BulletCtrl">
+  <header>
+    <h1>Bullet Chart</h1>
+  </header>
+  <nvd3 options="options" data="data"></nvd3>
+</section>
+<section id="todoapp" ng-controller="TodoCtrl" ng-show="false">
   <header id="header" todo-test="test">
     <h1>todos</h1>
     <form id="todo-form" ng-submit="controller.add()">
@@ -54,7 +60,7 @@
       Clear completed ({{todos.length - remainingCount}})</button>
   </footer>
 </section>
-<footer id="info">
+<footer id="info" ng-show="false">
   <p>Double-click to edit a todo</p>
   <p>Created with 
     <a href="https://github.com/greencatsoft/scalajs-angular">scalajs-angular</a>
@@ -63,3 +69,6 @@
 </footer>
 </body>
 </html>
+<!--
+  vim: et sw=2 ts=2 
+-->

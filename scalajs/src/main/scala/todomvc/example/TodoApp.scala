@@ -9,8 +9,9 @@ import com.greencatsoft.angularjs.Angular
 object TodoApp extends JSApp {
 
   override def main() {
-    val module = Angular.module("todomvc")
+    val module = Angular.module("todomvc", Seq("nvd3"))
 
+    module.controller(BulletCtrl)
     module.controller(TodoCtrl)
 
     module.directive(TodoItemDirective)
