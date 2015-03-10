@@ -6,20 +6,11 @@ import scala.scalajs.js.annotation.{JSExport, JSExportAll, JSName}
 import com.greencatsoft.angularjs.Controller
 import com.greencatsoft.angularjs.core.{ Location, Scope }
 
-object D3 {
-  val d3 = js.Dynamic.global.d3
-  def timeFormat(fmt: String)(v: js.Any) =
-    d3.time.format(fmt)(v)
-}
-
-object Data extends js.GlobalScope {
-  val cumulativeLineData: js.Array[Any] = js.native
-}
-
 @JSExport
 object CumulativeLineCtrl extends Controller {
 
   import D3._
+  import js.DynamicImplicits.number2dynamic
 
   override def initialize(scope: ScopeType) {
     scope.options = Options(Chart.cumulativeLineChart transitionDuration(300)
@@ -28,8 +19,8 @@ object CumulativeLineCtrl extends Controller {
       height(450)
       color(d3.scale.category10().range())
       margin(Chart.margin top(20) left(70) right(20) bottom(60))
-      x({ d: js.Array[Double] => d(0) })
-      y({ d: js.Array[Double] => d(1) / 100 })
+      x { d: js.Dynamic => number2dynamic(d.asInstanceOf[js.Array[Double]](0)) }
+      y { d: js.Dynamic => number2dynamic(d.asInstanceOf[js.Array[Double]](1) / 100) }
       average { d: js.Dynamic => d.mean.asInstanceOf[js.UndefOr[Double]].map(_/100) }
       xAxis(Chart.axis("Day [dd.mm.yy]") showMaxMin(true) staggerLabels(true)
         tickFormat({d: Double => D3.timeFormat("%d.%m.%y")(new js.Date(d))})

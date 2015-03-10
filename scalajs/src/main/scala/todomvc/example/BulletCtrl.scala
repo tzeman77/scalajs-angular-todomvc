@@ -17,6 +17,17 @@ import com.greencatsoft.angularjs.Controller
 import com.greencatsoft.angularjs.core.{ Location, Scope }
 import js.JSConverters._
 
+object D3 {
+  val d3 = js.Dynamic.global.d3
+  def timeFormat(fmt: String)(v: js.Any) =
+    d3.time.format(fmt)(v)
+}
+
+object Data extends js.GlobalScope {
+  val cumulativeLineData: js.Array[Any] = js.native
+  val discreteBarData: js.Array[Any] = js.native
+}
+
 class Axis(body: Map[String, Any]) {
   def axisLabel(l: String) = new Axis(body + ("axisLabel" -> l))
   def showMaxMin(b: Boolean) = new Axis(body + ("showMaxMin" -> b))
@@ -37,22 +48,23 @@ class Margin(body: Map[String, Int]) {
 }
 
 class Chart(body: Map[String, Any]) {
+  private def v[T](n: Symbol, v: T) = new Chart(body + (n.name -> v))
 
   def transitionDuration(ms: Int) = new Chart(body + ("transitionDuration" -> ms))
   def height(h: Int) = new Chart(body + ("height" -> h))
   def width(w: Int) = new Chart(body + ("width" -> w))
-  def x(f: js.Function1[js.Array[Double], Double]) = new Chart(body + ("x" -> f))
-  def y(f: js.Function1[js.Array[Double], Double]) = new Chart(body + ("y" -> f))
-  def average(f: js.Function1[js.Dynamic, Any]) =
-    new Chart(body + ("average" -> f))
-  def color(colors: js.Array[String]) = new Chart(body + ("color" -> colors))
-  def color(colors: js.Any) = new Chart(body + ("color" -> colors))
-  def useInteractiveGuideline(b: Boolean) =
-    new Chart(body + ("useInteractiveGuideline" -> b))
-  def clipVoronoi(b: Boolean) = new Chart(body + ("clipVoronoi" -> b))
-  def xAxis(a: Axis) = new Chart(body + ("xAxis" -> a.toJs))
-  def yAxis(a: Axis) = new Chart(body + ("yAxis" -> a.toJs))
-  def margin(m: Margin) = new Chart(body + ("margin" -> m.toJs))
+  def x(f: js.Function1[js.Dynamic, js.Dynamic]) = v('x, f)
+  def y(f: js.Function1[js.Dynamic, js.Dynamic]) = v('y, f)
+  def average(f: js.Function1[js.Dynamic, Any]) = v('average, f)
+  def color(colors: js.Array[String]) = v('color, colors)
+  def color(colors: js.Any) = v('color, colors)
+  def useInteractiveGuideline(b: Boolean) = v('useInteractiveGuideline, b)
+  def clipVoronoi(b: Boolean) = v('clipVoronoi, b)
+  def xAxis(a: Axis) = v('xAxis, a.toJs)
+  def yAxis(a: Axis) = v('yAxis, a.toJs)
+  def margin(m: Margin) = v('margin, m.toJs)
+  def showValues(b: Boolean) = v('showValues, b)
+  def valueFormat(f: js.Function1[js.Dynamic, js.Dynamic]) = v('valueFormat, f)
 
   def toJs = body.toJSDictionary
 }
@@ -61,6 +73,7 @@ object Chart {
   private def as(t: String) = new Chart(Map("type" -> t))
   def bulletChart = as("bulletChart")
   def cumulativeLineChart = as("cumulativeLineChart")
+  def discreteBarChart = as("discreteBarChart")
   def axis(l: String) = new Axis(Map()) axisLabel(l)
   def margin = new Margin(Map())
 }
