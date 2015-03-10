@@ -12,6 +12,8 @@ object TodoApp extends JSApp {
     val module = Angular.module("todomvc", Seq("nvd3"))
 
     module.controller(BulletCtrl)
+    module.controller(CumulativeLineCtrl)
+
     module.controller(TodoCtrl)
 
     module.directive(TodoItemDirective)

@@ -15,20 +15,61 @@ import org.scalajs.dom.console
 import com.greencatsoft.angularjs.inject
 import com.greencatsoft.angularjs.Controller
 import com.greencatsoft.angularjs.core.{ Location, Scope }
+import js.JSConverters._
+
+class Axis(body: Map[String, Any]) {
+  def axisLabel(l: String) = new Axis(body + ("axisLabel" -> l))
+  def showMaxMin(b: Boolean) = new Axis(body + ("showMaxMin" -> b))
+  def staggerLabels(b: Boolean) = new Axis(body + ("staggerLabels" -> b))
+  def labelDistance(d: Int) = new Axis(body + ("axisLabelDistance" -> d))
+  def tickFormat(f: js.Function1[Double, js.Any]) =
+    new Axis(body + ("tickFormat" -> f))
+  def toJs = body.toJSDictionary
+}
+
+class Margin(body: Map[String, Int]) {
+  def v(v: Symbol, i: Int) = new Margin(body + (v.name -> i))
+  def top(i: Int) = v('top, i)
+  def bottom(i: Int) = v('bottom, i)
+  def left(i: Int) = v('left, i)
+  def right(i: Int) = v('right, i)
+  def toJs = body.toJSDictionary
+}
 
 class Chart(body: Map[String, Any]) {
+
   def transitionDuration(ms: Int) = new Chart(body + ("transitionDuration" -> ms))
   def height(h: Int) = new Chart(body + ("height" -> h))
-  import js.JSConverters._
+  def width(w: Int) = new Chart(body + ("width" -> w))
+  def x(f: js.Function1[js.Array[Double], Double]) = new Chart(body + ("x" -> f))
+  def y(f: js.Function1[js.Array[Double], Double]) = new Chart(body + ("y" -> f))
+  def average(f: js.Function1[js.Dynamic, Any]) =
+    new Chart(body + ("average" -> f))
+  def color(colors: js.Array[String]) = new Chart(body + ("color" -> colors))
+  def color(colors: js.Any) = new Chart(body + ("color" -> colors))
+  def useInteractiveGuideline(b: Boolean) =
+    new Chart(body + ("useInteractiveGuideline" -> b))
+  def clipVoronoi(b: Boolean) = new Chart(body + ("clipVoronoi" -> b))
+  def xAxis(a: Axis) = new Chart(body + ("xAxis" -> a.toJs))
+  def yAxis(a: Axis) = new Chart(body + ("yAxis" -> a.toJs))
+  def margin(m: Margin) = new Chart(body + ("margin" -> m.toJs))
+
   def toJs = body.toJSDictionary
 }
 
 object Chart {
-  def bulletChart = new Chart(Map("type" -> "bulletChart"))
+  private def as(t: String) = new Chart(Map("type" -> t))
+  def bulletChart = as("bulletChart")
+  def cumulativeLineChart = as("cumulativeLineChart")
+  def axis(l: String) = new Axis(Map()) axisLabel(l)
+  def margin = new Margin(Map())
 }
 
 @JSExportAll
 case class Options(var chart: js.Dictionary[Any])
+
+@JSExportAll
+case class Series(val key: String, val values: js.Array[js.Array[Double]])
 
 class ChartData(body: Map[String, Any] = Map()) {
   def title(t: String) = new ChartData(body + ("title" -> t))
@@ -49,7 +90,7 @@ object ChartData {
 
 trait ChartScope extends Scope {
   var options: Options = js.native
-  var data: js.Dictionary[Any] = js.native
+  var data: js.Any = js.native
 }
 
 @JSExport

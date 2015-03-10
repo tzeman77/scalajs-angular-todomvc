@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("lib/nvd3/nv.d3.css")">
+  <script src="@routes.Assets.versioned("js/data.js")"></script>
   <script src="@routes.Assets.versioned("lib/jquery/jquery.js")"></script>
   <script src="@routes.Assets.versioned("lib/angularjs/angular.js")"></script>
   <script src="@routes.Assets.versioned("lib/d3js/d3.js")"></script>
@@ -23,6 +24,14 @@
   </header>
   <nvd3 options="options" data="data"></nvd3>
 </section>
+
+<section id="cumulativeLine" ng-controller="CumulativeLineCtrl">
+  <header>
+    <h1>Cumulative Line Chart</h1>
+  </header>
+  <nvd3 options="options" data="data"></nvd3>
+</section>
+
 <section id="todoapp" ng-controller="TodoCtrl" ng-show="false">
   <header id="header" todo-test="test">
     <h1>todos</h1>
