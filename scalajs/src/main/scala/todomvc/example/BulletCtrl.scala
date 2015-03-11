@@ -28,6 +28,7 @@ object Data extends js.GlobalScope {
   val discreteBarData: js.Array[Any] = js.native
   val donutData: js.Array[Any] = js.native
   val historicalBarData: js.Array[Any] = js.native
+  val multiBarHorizontalData: js.Array[Any] = js.native
 }
 
 class Axis(body: Map[String, Any]) {
@@ -72,6 +73,7 @@ class Chart(body: Map[String, Any]) {
   def yAxis(a: Axis) = v('yAxis, a.toJs)
   def margin(m: Margin) = v('margin, m.toJs)
   def showValues(b: Boolean) = v('showValues, b)
+  def showControls(b: Boolean) = v('showControls, b)
   def showLabels(b: Boolean) = v('showLabels, b)
   def valueFormat(f: js.Function1[js.Dynamic, js.Dynamic]) = v('valueFormat, f)
   def donut(b: Boolean) = v('donut, b)
@@ -81,13 +83,14 @@ class Chart(body: Map[String, Any]) {
 }
 
 object Chart {
-  private def as(t: String) = new Chart(Map("type" -> t))
+  private def as(t: Symbol) = new Chart(Map("type" -> t.name))
 
-  def bulletChart = as("bulletChart")
-  def cumulativeLineChart = as("cumulativeLineChart")
-  def discreteBarChart = as("discreteBarChart")
-  def pieChart = as("pieChart")
-  def historicalBarChart = as("historicalBarChart")
+  def bulletChart = as('bulletChart)
+  def cumulativeLineChart = as('cumulativeLineChart)
+  def discreteBarChart = as('discreteBarChart)
+  def pieChart = as('pieChart)
+  def historicalBarChart = as('historicalBarChart)
+  def multiBarHorizontalChart = as('multiBarHorizontalChart)
 
   def axis(l: String) = new Axis(Map()) axisLabel(l)
   def margin = new Margin(Map())
