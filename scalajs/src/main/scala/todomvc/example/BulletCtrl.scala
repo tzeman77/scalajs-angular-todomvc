@@ -27,15 +27,17 @@ object Data extends js.GlobalScope {
   val cumulativeLineData: js.Array[Any] = js.native
   val discreteBarData: js.Array[Any] = js.native
   val donutData: js.Array[Any] = js.native
+  val historicalBarData: js.Array[Any] = js.native
 }
 
 class Axis(body: Map[String, Any]) {
-  def axisLabel(l: String) = new Axis(body + ("axisLabel" -> l))
-  def showMaxMin(b: Boolean) = new Axis(body + ("showMaxMin" -> b))
-  def staggerLabels(b: Boolean) = new Axis(body + ("staggerLabels" -> b))
-  def labelDistance(d: Int) = new Axis(body + ("axisLabelDistance" -> d))
-  def tickFormat(f: js.Function1[Double, js.Any]) =
-    new Axis(body + ("tickFormat" -> f))
+  private def v[T](n: Symbol, v: T) = new Axis(body + (n.name -> v))
+  def axisLabel(l: String) = v('axisLabel, l)
+  def showMaxMin(b: Boolean) = v('showMaxMin, b)
+  def staggerLabels(b: Boolean) = v('staggerLabels, b)
+  def labelDistance(d: Int) = v('axisLabelDistance, d)
+  def tickFormat(f: js.Function1[Double, js.Any]) = v('tickFormat, f)
+  def rotateLabels(deg: Int) = v('rotateLabels, deg)
   def toJs = body.toJSDictionary
 }
 
@@ -85,6 +87,7 @@ object Chart {
   def cumulativeLineChart = as("cumulativeLineChart")
   def discreteBarChart = as("discreteBarChart")
   def pieChart = as("pieChart")
+  def historicalBarChart = as("historicalBarChart")
 
   def axis(l: String) = new Axis(Map()) axisLabel(l)
   def margin = new Margin(Map())
