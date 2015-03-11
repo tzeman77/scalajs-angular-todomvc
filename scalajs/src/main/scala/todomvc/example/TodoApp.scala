@@ -17,6 +17,7 @@ object TodoApp extends JSApp {
     module.controller(DonutCtrl)
     module.controller(HistoricalBarCtrl)
     module.controller(MultiBarHorizontalCtrl)
+    module.controller(PieCtrl)
 
     module.controller(TodoCtrl)
 

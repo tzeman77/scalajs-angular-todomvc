@@ -29,6 +29,7 @@ object Data extends js.GlobalScope {
   val donutData: js.Array[Any] = js.native
   val historicalBarData: js.Array[Any] = js.native
   val multiBarHorizontalData: js.Array[Any] = js.native
+  val pieData: js.Array[Any] = js.native
 }
 
 class Axis(body: Map[String, Any]) {
@@ -78,6 +79,7 @@ class Chart(body: Map[String, Any]) {
   def valueFormat(f: js.Function1[js.Dynamic, js.Dynamic]) = v('valueFormat, f)
   def donut(b: Boolean) = v('donut, b)
   def legend(l: Legend) = v('legend, l)
+  def labelThreshold(t: Double) = v('labelThreshold, t)
 
   def toJs = body.toJSDictionary
 }

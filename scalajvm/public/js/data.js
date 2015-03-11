@@ -67,6 +67,8 @@ var donutData = [{
   y: .5
 }];
 
+var pieData = donutData;
+
 var historicalBarData = [{
   "key" : "Quantity" ,
   "bar": true,
