@@ -30,6 +30,7 @@ object Data extends js.GlobalScope {
   val historicalBarData: js.Array[Any] = js.native
   val multiBarHorizontalData: js.Array[Any] = js.native
   val pieData: js.Array[Any] = js.native
+  val stackedAreaData: js.Array[Any] = js.native
 }
 
 class Axis(body: Map[String, Any]) {
@@ -70,6 +71,7 @@ class Chart(body: Map[String, Any]) {
   def color(colors: js.Any) = v('color, colors)
   def useInteractiveGuideline(b: Boolean) = v('useInteractiveGuideline, b)
   def clipVoronoi(b: Boolean) = v('clipVoronoi, b)
+  def useVoronoi(b: Boolean) = v('useVoronoi, b)
   def xAxis(a: Axis) = v('xAxis, a.toJs)
   def yAxis(a: Axis) = v('yAxis, a.toJs)
   def margin(m: Margin) = v('margin, m.toJs)
@@ -80,6 +82,7 @@ class Chart(body: Map[String, Any]) {
   def donut(b: Boolean) = v('donut, b)
   def legend(l: Legend) = v('legend, l)
   def labelThreshold(t: Double) = v('labelThreshold, t)
+  def clipEdge(b: Boolean) = v('clipEdge, b)
 
   def toJs = body.toJSDictionary
 }
@@ -93,6 +96,7 @@ object Chart {
   def pieChart = as('pieChart)
   def historicalBarChart = as('historicalBarChart)
   def multiBarHorizontalChart = as('multiBarHorizontalChart)
+  def stackedAreaChart = as('stackedAreaChart)
 
   def axis(l: String) = new Axis(Map()) axisLabel(l)
   def margin = new Margin(Map())
