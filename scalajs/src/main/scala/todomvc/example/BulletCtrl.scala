@@ -26,6 +26,7 @@ object D3 {
 object Data extends js.GlobalScope {
   val cumulativeLineData: js.Array[Any] = js.native
   val discreteBarData: js.Array[Any] = js.native
+  val donutData: js.Array[Any] = js.native
 }
 
 class Axis(body: Map[String, Any]) {
@@ -39,12 +40,17 @@ class Axis(body: Map[String, Any]) {
 }
 
 class Margin(body: Map[String, Int]) {
-  def v(v: Symbol, i: Int) = new Margin(body + (v.name -> i))
+  private def v(v: Symbol, i: Int) = new Margin(body + (v.name -> i))
   def top(i: Int) = v('top, i)
   def bottom(i: Int) = v('bottom, i)
   def left(i: Int) = v('left, i)
   def right(i: Int) = v('right, i)
   def toJs = body.toJSDictionary
+}
+
+class Legend(m: Map[String, Any]) {
+  private def v[T](n: Symbol, v: T) = new Legend(m + (n.name -> v))
+  def margin(m: Margin) = v('margin, m)
 }
 
 class Chart(body: Map[String, Any]) {
@@ -64,18 +70,25 @@ class Chart(body: Map[String, Any]) {
   def yAxis(a: Axis) = v('yAxis, a.toJs)
   def margin(m: Margin) = v('margin, m.toJs)
   def showValues(b: Boolean) = v('showValues, b)
+  def showLabels(b: Boolean) = v('showLabels, b)
   def valueFormat(f: js.Function1[js.Dynamic, js.Dynamic]) = v('valueFormat, f)
+  def donut(b: Boolean) = v('donut, b)
+  def legend(l: Legend) = v('legend, l)
 
   def toJs = body.toJSDictionary
 }
 
 object Chart {
   private def as(t: String) = new Chart(Map("type" -> t))
+
   def bulletChart = as("bulletChart")
   def cumulativeLineChart = as("cumulativeLineChart")
   def discreteBarChart = as("discreteBarChart")
+  def pieChart = as("pieChart")
+
   def axis(l: String) = new Axis(Map()) axisLabel(l)
   def margin = new Margin(Map())
+  def legend = new Legend(Map())
 }
 
 @JSExportAll

@@ -14,6 +14,7 @@ object TodoApp extends JSApp {
     module.controller(BulletCtrl)
     module.controller(CumulativeLineCtrl)
     module.controller(DiscreteBarCtrl)
+    module.controller(DonutCtrl)
 
     module.controller(TodoCtrl)
 
