@@ -24,9 +24,4 @@ object DonutCtrl extends Controller {
   trait ScopeType extends ChartScope
 }
 
-
-
-// vim: set ts=2 sw=2 et:
-
-
 // vim: set ts=2 sw=2 et:
