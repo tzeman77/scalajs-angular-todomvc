@@ -20,6 +20,7 @@ object TodoApp extends JSApp {
     module.controller(PieCtrl)
     module.controller(StackedAreaCtrl)
     module.controller(RadarCtrl)
+    module.controller(RadarD3Ctrl)
 
     module.controller(TodoCtrl)
 

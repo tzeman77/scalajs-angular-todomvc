@@ -35,6 +35,9 @@ object Data extends js.GlobalScope {
   val radarData: js.Any = js.native
   val radarOptions: js.Any = js.native
   val radarData2: js.Any = js.native
+  val radarD3legend: js.Array[String] = js.native
+  val radarD3data: js.Array[js.Array[js.Object]] = js.native
+  val radarD3cfg: js.Object = js.native
 }
 
 class Axis(body: Map[String, Any]) {

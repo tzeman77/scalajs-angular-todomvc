@@ -12,6 +12,7 @@
   <script src="@routes.Assets.versioned("lib/jquery/jquery.js")"></script>
   <script src="@routes.Assets.versioned("lib/angularjs/angular.js")"></script>
   <script src="@routes.Assets.versioned("lib/d3js/d3.js")"></script>
+  <script src="@routes.Assets.versioned("js/RadarChart.js")"></script>
   <script src="@routes.Assets.versioned("lib/nvd3/nv.d3.js")"></script>
   <script src="@routes.Assets.versioned("lib/angular-nvd3/angular-nvd3.js")"></script>
   <script src="@routes.Assets.versioned("lib/chartjs/Chart.js")"></script>
@@ -79,9 +80,16 @@
 
 <section id="radarChart" ng-controller="RadarCtrl">
   <header>
-    <h1>Radar Chart</h1>
+    <h1>Radar Chart (chartjs)</h1>
   </header>
   <canvas id="radar" class="chart chart-radar" data="data" labels="labels" series="series" options="options" legend="legend"></canvas> 
+</section>
+
+<section id="radarChartD3" ng-controller="RadarD3Ctrl">
+  <header>
+    <h1>Radar Chart (D3)</h1>
+  </header>
+  <div id="radarD3"></div>
 </section>
 
 <section id="todoapp" ng-controller="TodoCtrl" ng-show="false">
