@@ -9,7 +9,7 @@ import com.greencatsoft.angularjs.Angular
 object TodoApp extends JSApp {
 
   override def main() {
-    val module = Angular.module("todomvc", Seq("nvd3"))
+    val module = Angular.module("todomvc", Seq("nvd3", "chart.js"))
 
     module.controller(BulletCtrl)
     module.controller(CumulativeLineCtrl)
@@ -19,6 +19,7 @@ object TodoApp extends JSApp {
     module.controller(MultiBarHorizontalCtrl)
     module.controller(PieCtrl)
     module.controller(StackedAreaCtrl)
+    module.controller(RadarCtrl)
 
     module.controller(TodoCtrl)
 

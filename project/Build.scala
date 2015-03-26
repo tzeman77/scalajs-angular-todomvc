@@ -48,7 +48,9 @@ object ApplicationBuild extends Build with UniversalKeys {
         "org.squeryl" %% "squeryl" % "0.9.5-7",
         "org.webjars" % "jquery" % "2.1.3",
         "org.webjars" % "angularjs" % "1.3.13",
-	"org.webjars" % "angular-nvd3" % "0.0.9"
+	"org.webjars" % "angular-nvd3" % "0.0.9",
+	//"org.webjars" % "chartjs" % "26962ce",
+      	"org.webjars" % "angular-chart.js" % "0.5.3"
       ),
       commands += preStartCommand,
       EclipseKeys.skipParents in ThisBuild := false
@@ -71,7 +73,10 @@ object ApplicationBuild extends Build with UniversalKeys {
         "com.greencatsoft" %%% "scalajs-angular" % Versions.library,
         "com.github.benhutchison" %%% "prickle" % Versions.prickle,
         "com.greencatsoft" %%% "greenlight" % "0.1" % "test"
-      )
+      )/*,
+      jsDependencies ++= Seq(
+      	"org.webjars" % "angular-chart.js" % "0.5.3"
+      )*/
     )
 
   // Use reflection to rename the 'start' command to 'play-start'

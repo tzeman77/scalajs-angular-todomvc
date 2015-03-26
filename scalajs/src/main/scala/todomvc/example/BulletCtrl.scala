@@ -31,6 +31,10 @@ object Data extends js.GlobalScope {
   val multiBarHorizontalData: js.Array[Any] = js.native
   val pieData: js.Array[Any] = js.native
   val stackedAreaData: js.Array[Any] = js.native
+  val radarLabels: js.Array[String] = js.native
+  val radarData: js.Any = js.native
+  val radarOptions: js.Any = js.native
+  val radarData2: js.Any = js.native
 }
 
 class Axis(body: Map[String, Any]) {
